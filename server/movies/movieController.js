@@ -59,10 +59,12 @@ const searchMovieTitle = async (req, res) => {
     }
 }
 
+
 const updateMovie = async (req, res) => {
     const { title } = req.params;
+    const {year}=req.body;
     console.log(title);
-    const updatedMovie = await Movie.update({ "length": "160 mins", "title": "Chakde !!" }, {
+    const updatedMovie = await Movie.update({  "year":year }, {
         where: {
             "title": title
         }
@@ -70,6 +72,16 @@ const updateMovie = async (req, res) => {
 
     );
 
+    console.log(updatedMovie);
+    if (!isEmpty(updatedMovie)) {
+        res.json("Movie Updated Successfully...");
+    }
+    else {
+        res.json("Error in updating the     Movie ....");
+    }
+
+
+}
     console.log(updatedMovie);
     if (!isEmpty(updatedMovie)) {
         res.json("Movie Updated Successfully...");
